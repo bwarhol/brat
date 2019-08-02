@@ -6,6 +6,8 @@ cp config_template.py config.py
 ./install.sh
 ```
 
+## Changes ##
+
 ## Documentation ##
 
 In an attempt to keep all user-facing documentation in one place, please visit
