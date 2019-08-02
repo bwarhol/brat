@@ -1,5 +1,11 @@
 # brat rapid annotation tool (brat) #
 
+## Installation ##
+```
+cp config_template.py config.py
+./install.sh
+```
+
 ## Documentation ##
 
 In an attempt to keep all user-facing documentation in one place, please visit
