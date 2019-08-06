@@ -69,9 +69,10 @@ class InvalidAuthError(ProtocolError):
 
 def _is_authenticated(user, password):
     # TODO: Replace with a database back-end
-    return (user in USER_PASSWORD and
-            password == USER_PASSWORD[user])
+    #return (user in USER_PASSWORD and
+    #        password == USER_PASSWORD[user])
     # password == _password_hash(USER_PASSWORD[user]))
+    return True #BECCA
 
 
 def _password_hash(password):
@@ -83,7 +84,8 @@ def login(user, password):
         raise InvalidAuthError
 
     get_session()['user'] = user
-    Messager.info('Hello!')
+    #Messager.info('Hello!')
+    Messenger.info('Hello, your ID is'+user) #BECCA  change this again if using user ids instead of guid
     return {}
 
 

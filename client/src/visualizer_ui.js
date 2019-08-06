@@ -1554,6 +1554,11 @@ var VisualizerUI = (function($, window, undefined) {
           dispatcher.post('setDocument', [selectorData.items[newPos][2],
                                           selectorData.items[newPos][1]]);
         }
+        // BECCA  condition to show GUID and Submit Button at end of documents
+        if (newPos >= 0 && newPos == selectorData.items.length && selectorData.items[newPos][0] != "c") {
+          $('#submit_button').show();
+          $('#uniqueid').show();
+        }
         return false;
       };
      
@@ -1965,10 +1970,10 @@ var VisualizerUI = (function($, window, undefined) {
       var authFormSubmit = function(evt) {
         dispatcher.post('hideForm');
         var _user = $('#auth_user').val();
-        var password = $('#auth_pass').val();
+        var password = utAustinBrat2019; //BECCA  i set a hardcoded password since it's universal login
         dispatcher.post('ajax', [{
             action: 'login',
-            user: _user,
+            user: cur_guid, //BECCA  changed _user to cur_guid
             password: password,
           },
           function(response) {
@@ -1989,7 +1994,7 @@ var VisualizerUI = (function($, window, undefined) {
       $('#auth_button').click(function(evt) {
         if (user) {
           dispatcher.post('ajax', [{
-            action: 'logout'
+            //action: 'logout' BECCA
           }, function(response) {
             user = null;
             $('#auth_button').val('Login');
@@ -2001,6 +2006,7 @@ var VisualizerUI = (function($, window, undefined) {
         }
       });
       authForm.submit(authFormSubmit);
+      authFormSubmit(); //BECCA  again change this/remove it if you decide to go with worker ID logins
 
 
       var tutorialForm = $('#tutorial');

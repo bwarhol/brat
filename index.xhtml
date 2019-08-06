@@ -48,7 +48,39 @@
           var logger = new AnnotationLog(dispatcher);
           // Util.profileEnable();
           dispatcher.post('init');
+          //BECCA
+          $('#auth_button').hide();
+          $('#pulldown').remove();
+          $('#document_name').hide();
+          $('#submit_button').hide();
+          $("#uniqueid").html("Your unique ID (do not refresh): "+cur_guid);
       });
+
+      // BECCA guid function, taken from Jessy's old code
+      function guid() {
+        function s4() {
+          return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+          s4() + '-' + s4() + s4() + s4();
+      }
+
+      // BECCA submitTrigger function, taken from Jessy's old code
+      function submitTrigger() {
+        var uidWindow = $("#uid_window");
+        dispatcher.post('initForm', [uidWindow, {
+          width: 600, 
+          height: 100, 
+          no_cancel: true,    
+          no_ok: true,        
+          close: function(evt) {
+            keymap = null;
+          }
+        }]);
+        dispatcher.post('showForm', [uidWindow]);
+      }
 
     </script>
     <link rel="stylesheet" type="text/css" href="static/style-vis.css"/>
@@ -109,10 +141,16 @@
     <div id="commentpopup"/>
     <div id="header" class="ui-widget">
       <div id="mainHeader" class="ui-widget-header">
+        <!-- BECCA  field added -->
+        <div id="uniqueid"></div>
         <div id="mainlogo" class="logo unselectable">brat</div>
+        <!-- BECCA  move help link to top of bar -->
+        <a id="help_link" target="manual" href="http://brat.nlplab.org/manual.html" style="color:white">Help <img src="static/img/Fugue-shadowless-question.png"/></a>
         <span id="navbuttons">
           <img id="prev" alt="Previous document (Cursor Left)" title="Previous document (Cursor Left)" src="static/img/arrow-180.png"/><img id="next" alt="Next document (Cursor Right)" title="Next document (Cursor Right)" src="static/img/arrow.png"/>
         </span>
+        <!-- BECCA added submit button-->
+        <input id="submit_button" type="button" value="Submit"/>
         <div id="document_name">
           <input readonly="readonly" class="ui-widget-header"/>
         </div>
